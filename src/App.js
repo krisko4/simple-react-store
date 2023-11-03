@@ -13,7 +13,7 @@ export class Store {
   }
 
   unsubscribe(sub) {
-    this.subs.filter((s) => s !== sub);
+    this.subs = this.subs.filter((s) => s !== sub);
   }
 
   dispatch(setState) {
@@ -41,17 +41,19 @@ export const useSelector = (selectorFn) => {
 };
 
 const store = new Store({
-  firstName: "marek",
-  lastName: "tadek",
+  firstName: "John",
+  lastName: "Tester",
 });
 
 const Comp1 = () => {
   const firstName = useSelector((state) => state.firstName);
 
+  console.log(firstName);
+
   const handleClick = () => {
     store.dispatch((currentState) => ({
       ...currentState,
-      firstName: "zenek",
+      firstName: "Jerry",
     }));
   };
 
@@ -71,7 +73,7 @@ const Comp2 = () => {
   const handleClick = () => {
     store.dispatch((currentState) => ({
       ...currentState,
-      lastName: "mareczek",
+      lastName: "Marcus",
     }));
   };
 
